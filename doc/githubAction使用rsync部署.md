@@ -8,7 +8,7 @@ tag: github
 ssh-keygen -t rsa -C "bot@github"
 # 注意设置名称不要重复
 ```
-## 将私钥追加在authorized_keys文件的末尾中
+## 将公钥追加在authorized_keys文件的末尾中
 
 ## github action 配置
 ``` yml
