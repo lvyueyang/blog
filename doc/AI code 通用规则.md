@@ -1,3 +1,8 @@
+## 语言规范
+
+- 代码注释、文档、页面显示文字、git commit 信息，均使用**简体中文**。
+- 生成代码时，对函数、关键逻辑、复杂算法、业务规则等适当添加中文注释，帮助理解意图；简单赋值或显而易见的代码无需注释。
+- 
 ## 后端（`backend`）
 
 ### 技术栈
@@ -10,9 +15,13 @@
 ### 接口设计规范
 
 - **HTTP 方法**：所有接口统一使用 `POST`，不在路径中携带参数（`id`、`code` 等标识符放入请求体）。仅文件二进制下载接口使用 `GET`。
-- 列表响应格式：`{ "list": [], "pagination": { "page", "pageSize", "total" } }`
-- 状态切换接口：`POST /{resource}/status`（`id` 放请求体）
-- 权限码格式：`resource:action`（例如 `platform-user:view`）
+- **列表响应格式**：`{ "list": [], "pagination": { "page", "pageSize", "total" } }`
+- **状态切换接口**：`POST /{resource}/status`（`id` 放请求体）
+- **权限码格式**：`resource:action`（例如 `platform-user:view`）
+- **目标响应外层默认收敛为** `{code: number, msg: string, request_id: uuid, data: T}`；
+- **列表响应data默认收敛为**：`data: { "list": [], "pagination": { "page", "pageSize", "total" } }`。
+- **默认约定成功码为** `0`，失败使用数值型业务码；保留 HTTP status 作为传输层状态。
+- **`request_id`** 作为所有响应必带字段，后续实现优先通过平台层中间件统一注入，避免业务 handler 各自生成。
 
 ## 数据库规范
 
@@ -47,7 +56,3 @@
 - `src/utils/`：纯工具函数、类型辅助、底层请求封装
 ```
 
-## 语言规范
-
-- 代码注释、文档、页面显示文字、git commit 信息，均使用**简体中文**。
-- 生成代码时，对函数、关键逻辑、复杂算法、业务规则等适当添加中文注释，帮助理解意图；简单赋值或显而易见的代码无需注释。
